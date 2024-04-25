@@ -1,14 +1,9 @@
 class Solution {
     public boolean canJump(int[] nums) {
-        boolean[] jumppoints = new boolean[nums.length];
-        jumppoints[0] = true;
-        for (int x=0; x<nums.length; x++) {
-            if (jumppoints[x]) {
-                for (int y=1; y<=nums[x] && y+x<nums.length; y++) {
-                    jumppoints[x+y] = true;
-                }
-            }
+        int goalPost = nums.length-1;
+        for (int x=nums.length-2; x>=0; x--) {
+            goalPost = (nums[x] >= goalPost-x) ? x : goalPost;
         }
-        return jumppoints[nums.length-1];
+        return goalPost==0;
     }
 }
