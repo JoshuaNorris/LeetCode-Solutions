@@ -2,18 +2,24 @@
 
 class Solution:
     def isPalindrome(self, s: str) -> bool:
+        s = remove_non_alphabetic(s).lower()
         l: int = 0
         r: int = len(s) - 1
+        if (len(s) == 0):
+            return True
+        
         while True:
-
-            if s[l].lower() != s[r].lower():
+            if s[l] != s[r]:
                 return False
             l+=1
             r-=1
-            while (l<len(s) and not s[l].isalpha()):
-                l+=1
-            while (r>=0 and not s[r].isalpha()):
-                r-=1
             if l >= r:
                 break
         return True
+
+def remove_non_alphabetic(input_string):
+    result = ''
+    for char in input_string:
+        if char.isalpha() or char.isnumeric():
+            result += char
+    return result
